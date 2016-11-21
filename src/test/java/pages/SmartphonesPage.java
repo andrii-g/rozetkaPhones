@@ -13,11 +13,10 @@ import java.util.List;
  * Created by User on 16.11.2016.
  */
 public class SmartphonesPage {
-    private WebDriver driver;
 
-    public SmartphonesPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+
+    public SmartphonesPage() {
+        PageFactory.initElements(BasePage.getDriver(), this);
     }
 
     @FindBy(xpath = "//i[.='Доступные смартфоны']//parent::span[contains(@class, 'parametrs')]")
@@ -35,6 +34,9 @@ public class SmartphonesPage {
     @FindBy(xpath = "//li[@id='page3']/a")
     WebElement thirdListLink;
 
+    @FindBy(xpath = "//div[@name='filter_parameters_title'][contains(text(), 'Класс')]")
+    WebElement expandClassBlock;
+
     @FindAll({
             @FindBy(xpath = "//div[contains(@class, 'tile-catalog')]//div[contains(@class, 'tile-catalog')][1]//div[contains(@class, 'g-price-uah')]"),
             @FindBy(xpath = "//div[contains(@class, 'tile-catalog')]//div[contains(@class, 'tile-catalog')][2]//div[contains(@class, 'g-price-uah')]"),
@@ -51,6 +53,10 @@ public class SmartphonesPage {
 
     public void clickObtainableSmartphonesLink(){
         obtainableSmartphonesLink.click();
+    }
+
+    public void expandClassBlock(){
+        expandClassBlock.click();
     }
 
     public void clickSortingDropdown(){

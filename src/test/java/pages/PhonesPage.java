@@ -9,11 +9,9 @@ import org.openqa.selenium.support.PageFactory;
  * Created by User on 16.11.2016.
  */
 public class PhonesPage {
-    private WebDriver driver;
 
-    public PhonesPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+    public PhonesPage() {
+        PageFactory.initElements(BasePage.getDriver(), this);
     }
 
     @FindBy(xpath = "//a[.='Смартфоны']")
@@ -21,7 +19,7 @@ public class PhonesPage {
 
     public SmartphonesPage clickSmartphonesLink() {
         smartphonesLink.click();
-        return new SmartphonesPage(driver);
+        return new SmartphonesPage();
     }
 
 }

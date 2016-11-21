@@ -9,11 +9,9 @@ import org.openqa.selenium.support.PageFactory;
  * Created by User on 16.11.2016.
  */
 public class RozetkaStartPage {
-    private WebDriver driver;
 
-    public RozetkaStartPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+    public RozetkaStartPage() {
+        PageFactory.initElements(BasePage.getDriver(), this);
     }
 
     @FindBy(xpath = "//a[@data-title='Телефоны, ТВ и электроника']")
@@ -28,6 +26,6 @@ public class RozetkaStartPage {
 
     public PhonesPage clickPhonesSection() {
         phonesLink.click();
-        return new PhonesPage(driver);
+        return new PhonesPage();
     }
 }
