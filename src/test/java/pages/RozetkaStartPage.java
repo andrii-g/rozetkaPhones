@@ -1,5 +1,6 @@
 package pages;
 
+import helper.Helper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,11 +10,9 @@ import org.openqa.selenium.support.PageFactory;
  * Created by User on 16.11.2016.
  */
 public class RozetkaStartPage {
-    private WebDriver driver;
 
-    public RozetkaStartPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+    public RozetkaStartPage() {
+        PageFactory.initElements(BasePage.getDriver(), this);
     }
 
     @FindBy(xpath = "//a[@data-title='Телефоны, ТВ и электроника']")
@@ -23,11 +22,15 @@ public class RozetkaStartPage {
     WebElement phonesLink;
 
     public void clickPhoneTVSection() {
+        Helper helper = new Helper();
+        helper.waitForElement(phonesTvLink);
         phonesTvLink.click();
     }
 
     public PhonesPage clickPhonesSection() {
+        Helper helper = new Helper();
+        helper.waitForElement(phonesLink);
         phonesLink.click();
-        return new PhonesPage(driver);
+        return new PhonesPage();
     }
 }
