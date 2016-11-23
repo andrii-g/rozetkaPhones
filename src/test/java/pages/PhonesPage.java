@@ -1,5 +1,6 @@
 package pages;
 
+import helper.Helper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,6 +19,8 @@ public class PhonesPage {
     WebElement smartphonesLink;
 
     public SmartphonesPage clickSmartphonesLink() {
+        Helper helper = new Helper();
+        helper.waitForElement(smartphonesLink);
         smartphonesLink.click();
         return new SmartphonesPage();
     }

@@ -1,5 +1,6 @@
 package pages;
 
+import helper.Helper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,10 +22,14 @@ public class RozetkaStartPage {
     WebElement phonesLink;
 
     public void clickPhoneTVSection() {
+        Helper helper = new Helper();
+        helper.waitForElement(phonesTvLink);
         phonesTvLink.click();
     }
 
     public PhonesPage clickPhonesSection() {
+        Helper helper = new Helper();
+        helper.waitForElement(phonesLink);
         phonesLink.click();
         return new PhonesPage();
     }

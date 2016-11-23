@@ -34,21 +34,14 @@ public class RozetkaTest{
         PhonesPage phonesPage = startPage.clickPhonesSection();
 
         SmartphonesPage smartphones = phonesPage.clickSmartphonesLink();
-        smartphones.expandClassBlock();
         smartphones.clickObtainableSmartphonesLink();
 
         smartphones.clickSortingDropdown();
         smartphones.chooseAscendingPriceSorting();
         Assert.assertEquals("text is not equal to expected", expectedSortingText, smartphones.getSortingDropdownText());
 
-        smartphones.getDevicesData();
-        System.out.println(smartphones.getDevicesData());
-        smartphones.openSecondList();
-        smartphones.getDevicesData();
-        System.out.println(smartphones.getDevicesData());
-        smartphones.openThirdList();
-        smartphones.getDevicesData();
-        System.out.println(smartphones.getDevicesData());
+        String allDevicesData = smartphones.getAllDevicesData();
+        smartphones.writeDataIntoFile(allDevicesData);
     }
 
     @After
