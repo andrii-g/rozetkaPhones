@@ -43,6 +43,7 @@ public class RozetkaTest{
         smartphones.writeDataIntoFile(allDevicesData);
 
         ProductCartPage productCartPage = smartphones.clickFirstProduct();
+        productCartPage.clickBuyButton();
         productCartPage.getRecommendationBlockText();
 
         Assert.assertTrue("Failed assert that actual text contains expected. Expected: '" + expectedMessage + "' Actual: '" + productCartPage.getRecommendationBlockText() +"'",

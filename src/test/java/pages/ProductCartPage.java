@@ -13,12 +13,21 @@ public class ProductCartPage {
         PageFactory.initElements(BasePage.getDriver(), this);
     }
 
-    @FindBy(xpath = "//div[contains(@class, 'g-kit-slider-i')]//h3[contains(text(), 'Вместе дешевле')]")
+    @FindBy(xpath = "//div[@id='cart-popup']//h3[contains(text(), 'Вместе дешевле')]")
     WebElement recommendationBlock;
+
+    @FindBy(xpath = "//div[@id='detail_buy_label']//span[contains(@class, 'btn-link-green')]//button[@name='topurchases']")
+    WebElement buyButton;
 
     public String getRecommendationBlockText(){
         Helper helper = new Helper();
         helper.waitForElement(recommendationBlock);
         return recommendationBlock.getText();
+    }
+
+    public void clickBuyButton(){
+        Helper helper = new Helper();
+        helper.waitForElement(buyButton);
+        buyButton.click();
     }
 }
