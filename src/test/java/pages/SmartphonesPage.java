@@ -42,6 +42,9 @@ public class SmartphonesPage {
     @FindBy(xpath = "//li[contains(@class, 'active')]/span")
     WebElement currentPageNumberBlock;
 
+    @FindBy(xpath = "(//div[@class='over-wraper']//div[contains(@id, 'image')])[1]")
+    WebElement firstDeviceButton;
+
     @FindAll({
             @FindBy(xpath = "//div[contains(@class, 'tile-catalog')]//div[contains(@class, 'tile-catalog')][1]//div[contains(@class, 'g-price-uah')]"),
             @FindBy(xpath = "//div[contains(@class, 'tile-catalog')]//div[contains(@class, 'tile-catalog')][2]//div[contains(@class, 'g-price-uah')]"),
@@ -143,5 +146,12 @@ public class SmartphonesPage {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public ProductCartPage clickFirstProduct(){
+        Helper helper = new Helper();
+        helper.waitForElement(firstDeviceButton);
+        firstDeviceButton.click();
+        return new ProductCartPage();
     }
 }
