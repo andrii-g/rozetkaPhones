@@ -96,7 +96,7 @@ public class SmartphonesPage {
             int number = i + 1;
             data = data + "\n" + number + " устройство: " + arrayData[i];
         }
-        return data + "\n";
+        return data + "\n\n";
     }
 
     public void openSecondList() {
@@ -114,7 +114,7 @@ public class SmartphonesPage {
     public String getCurrentPageNumber() {
         Helper helper = new Helper();
         helper.waitForElement(currentPageNumberBlock);
-        return "\n" + currentPageNumberBlock.getText();
+        return currentPageNumberBlock.getText();
     }
 
     public String getAllDevicesData() {
