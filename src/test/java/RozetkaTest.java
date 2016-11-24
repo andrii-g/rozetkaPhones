@@ -5,10 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import pages.BasePage;
-import pages.PhonesPage;
-import pages.RozetkaStartPage;
-import pages.SmartphonesPage;
+import pages.*;
 
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
@@ -19,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class RozetkaTest{
 
     private String expectedSortingText;
+    private String expectedMessage;
 
     @Before
     public void setUp(){
@@ -29,6 +27,7 @@ public class RozetkaTest{
     public void test(){
         RozetkaStartPage startPage = new RozetkaStartPage();
         expectedSortingText = "от дешевых к дорогим";
+        expectedMessage = "Вместе дешевле";
 
         startPage.clickPhoneTVSection();
         PhonesPage phonesPage = startPage.clickPhonesSection();
@@ -42,6 +41,12 @@ public class RozetkaTest{
 
         String allDevicesData = smartphones.getAllDevicesData();
         smartphones.writeDataIntoFile(allDevicesData);
+
+        ProductCartPage productCartPage = smartphones.clickFirstProduct();
+        productCartPage.getRecommendationBlockText();
+
+        Assert.assertTrue("Failed assert that actual text contains expected. Expected: '" + expectedMessage + "' Actual: '" + productCartPage.getRecommendationBlockText() +"'",
+                productCartPage.getRecommendationBlockText().contains(expectedMessage));
     }
 
     @After

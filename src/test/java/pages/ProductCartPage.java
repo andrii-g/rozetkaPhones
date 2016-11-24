@@ -13,7 +13,7 @@ public class ProductCartPage {
         PageFactory.initElements(BasePage.getDriver(), this);
     }
 
-    @FindBy(xpath = "//div[contains(@class, 'wrap-cart-not-empty')]//div[contains(@name, 'kits_item')]//div[contains(@class, 'g-kit-slider-i')]//h3[contains(text(), 'Вместе дешевле')]")
+    @FindBy(xpath = "//div[contains(@class, 'g-kit-slider-i')]//h3[contains(text(), 'Вместе дешевле')]")
     WebElement recommendationBlock;
 
     public String getRecommendationBlockText(){
