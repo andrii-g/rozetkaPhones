@@ -1,9 +1,6 @@
 package pages;
 
 import io.github.bonigarcia.wdm.ChromeDriverManager;
-import org.junit.After;
-import org.junit.Before;
-import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,15 +16,11 @@ import java.util.concurrent.TimeUnit;
  */
 public class BasePage {
     private static WebDriver driver;
-//    private WebDriverWait wait;
-//    private final Wait<WebDriver> waiter = new WebDriverWait(this.getDriver(), 5, 1000);
     private Wait<WebDriver> wait = new WebDriverWait(driver, 10).ignoring(StaleElementReferenceException.class);
 
 
     public void waitFor(WebElement element){
-//        wait = new WebDriverWait(this.getDriver(), 10);
         wait.until(ExpectedConditions.visibilityOf(element));
-
     }
 
     public BasePage(){
