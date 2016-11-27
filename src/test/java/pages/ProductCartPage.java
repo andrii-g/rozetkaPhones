@@ -1,6 +1,5 @@
 package pages;
 
-import helper.Helper;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -8,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 /**
  * Created by Andrii_Grygoruk on 11/24/2016.
  */
-public class ProductCartPage {
+public class ProductCartPage extends BasePage {
     public ProductCartPage(){
         PageFactory.initElements(BasePage.getDriver(), this);
     }
@@ -20,14 +19,12 @@ public class ProductCartPage {
     WebElement buyButton;
 
     public String getRecommendationBlockText(){
-        Helper helper = new Helper();
-        helper.waitForElement(recommendationBlock);
+        this.waitFor(recommendationBlock);
         return recommendationBlock.getText();
     }
 
     public void clickBuyButton(){
-        Helper helper = new Helper();
-        helper.waitForElement(buyButton);
+        this.waitFor(buyButton);
         buyButton.click();
     }
 }

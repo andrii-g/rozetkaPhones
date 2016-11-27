@@ -1,6 +1,5 @@
 package pages;
 
-import helper.Helper;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
@@ -15,7 +14,7 @@ import java.util.List;
 /**
  * Created by User on 16.11.2016.
  */
-public class SmartphonesPage {
+public class SmartphonesPage extends BasePage{
 
     public SmartphonesPage() {
         PageFactory.initElements(BasePage.getDriver(), this);
@@ -60,32 +59,27 @@ public class SmartphonesPage {
     List<WebElement> deviceName;
 
     public void clickObtainableSmartphonesLink() {
-        Helper helper = new Helper();
-        helper.waitForElement(obtainableSmartphonesLink);
+        this.waitFor(obtainableSmartphonesLink);
         obtainableSmartphonesLink.click();
     }
 
     public void expandClassBlock() {
-        Helper helper = new Helper();
-        helper.waitForElement(expandClassBlock);
+        this.waitFor(expandClassBlock);
         expandClassBlock.click();
     }
 
     public void clickSortingDropdown() {
-        Helper helper = new Helper();
-        helper.waitForElement(sortingDropdown);
+        this.waitFor(sortingDropdown);
         sortingDropdown.click();
     }
 
     public void chooseAscendingPriceSorting() {
-        Helper helper = new Helper();
-        helper.waitForElement(priceAscendingLink);
+        this.waitFor(priceAscendingLink);
         priceAscendingLink.click();
     }
 
     public String getSortingDropdownText() {
-        Helper helper = new Helper();
-        helper.waitForElement(sortingDropdown);
+        this.waitFor(sortingDropdown);
         return sortingDropdown.getText();
     }
 
@@ -103,20 +97,17 @@ public class SmartphonesPage {
     }
 
     public void openSecondList() {
-        Helper helper = new Helper();
-        helper.waitForElement(secondListLink);
+        this.waitFor(secondListLink);
         secondListLink.click();
     }
 
     public void openThirdList() {
-        Helper helper = new Helper();
-        helper.waitForElement(thirdListLink);
+        this.waitFor(thirdListLink);
         thirdListLink.click();
     }
 
     public String getCurrentPageNumber() {
-        Helper helper = new Helper();
-        helper.waitForElement(currentPageNumberBlock);
+        this.waitFor(currentPageNumberBlock);
         return currentPageNumberBlock.getText();
     }
 
@@ -133,7 +124,7 @@ public class SmartphonesPage {
 
     public void writeDataIntoFile(String text) {
         try {
-            String filePath = "src/test/resources/devicesData.txt";
+            String filePath = "src/test/java/files/devicesData.txt";
             String fileAbsolutePath;
             File newFile = new File(filePath);
             newFile.createNewFile();
@@ -149,8 +140,7 @@ public class SmartphonesPage {
     }
 
     public ProductCartPage clickFirstProduct(){
-        Helper helper = new Helper();
-        helper.waitForElement(firstDeviceButton);
+        this.waitFor(firstDeviceButton);
         firstDeviceButton.click();
         return new ProductCartPage();
     }

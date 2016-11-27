@@ -1,7 +1,5 @@
 package pages;
 
-import helper.Helper;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -9,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 /**
  * Created by User on 16.11.2016.
  */
-public class PhonesPage {
+public class PhonesPage extends BasePage{
 
     public PhonesPage() {
         PageFactory.initElements(BasePage.getDriver(), this);
@@ -19,8 +17,7 @@ public class PhonesPage {
     WebElement smartphonesLink;
 
     public SmartphonesPage clickSmartphonesLink() {
-        Helper helper = new Helper();
-        helper.waitForElement(smartphonesLink);
+        this.waitFor(smartphonesLink);
         smartphonesLink.click();
         return new SmartphonesPage();
     }
