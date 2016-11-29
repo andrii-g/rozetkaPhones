@@ -18,13 +18,14 @@ public class RozetkaTest{
     private String expectedSortingText;
     private String expectedMessage;
 
-    @Before
-    public void setUp(){
-        BasePage.setUp();
-    }
+//    @Before
+//    public void setUp(){
+//
+//    }
 
     @Test
     public void test(){
+        BasePage.setUp();
         RozetkaStartPage startPage = new RozetkaStartPage();
         expectedSortingText = "от дешевых к дорогим";
         expectedMessage = "Вместе дешевле";
@@ -41,6 +42,10 @@ public class RozetkaTest{
 
         String allDevicesData = smartphones.getAllDevicesData();
         smartphones.writeDataIntoFile(allDevicesData);
+        JDBCHelper jdbcHelper = new JDBCHelper();
+        jdbcHelper.setDBTableData(allDevicesData);
+//        jdbcHelper.getDBCreatedPhoneData();
+
 
         ProductCartPage productCartPage = smartphones.clickFirstProduct();
         productCartPage.clickBuyButton();
@@ -48,11 +53,19 @@ public class RozetkaTest{
 
         Assert.assertTrue("Failed assert that actual text contains expected. Expected: '" + expectedMessage + "' Actual: '" + productCartPage.getRecommendationBlockText() +"'",
                 productCartPage.getRecommendationBlockText().contains(expectedMessage));
-    }
 
-    @After
-    public void tearDown(){
         BasePage.tearDown();
     }
+
+    @Test
+    public void testDB(){
+        JDBCHelper jdbcHelper = new JDBCHelper();
+        System.out.println(jdbcHelper.getDBTableData());
+    }
+
+//    @After
+//    public void tearDown(){
+//
+//    }
 
 }
