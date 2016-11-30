@@ -1,14 +1,10 @@
-import io.github.bonigarcia.wdm.ChromeDriverManager;
+import helper.DBHelper;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import pages.*;
 
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by User on 16.11.2016.
@@ -17,15 +13,16 @@ public class RozetkaTest{
 
     private String expectedSortingText;
     private String expectedMessage;
+    DBHelper dbHelper = new DBHelper();
 
-//    @Before
-//    public void setUp(){
-//
-//    }
+    @Before
+    public void setUp(){
+        BasePage.setUp();
+    }
 
     @Test
     public void test(){
-        BasePage.setUp();
+
         RozetkaStartPage startPage = new RozetkaStartPage();
         expectedSortingText = "от дешевых к дорогим";
         expectedMessage = "Вместе дешевле";
@@ -41,11 +38,9 @@ public class RozetkaTest{
         Assert.assertEquals("text is not equal to expected", expectedSortingText, smartphones.getSortingDropdownText());
 
         String allDevicesData = smartphones.getAllDevicesData();
-        smartphones.writeDataIntoFile(allDevicesData);
-        JDBCHelper jdbcHelper = new JDBCHelper();
-        jdbcHelper.setDBTableData(allDevicesData);
-//        jdbcHelper.getDBCreatedPhoneData();
+        smartphones.writeDataIntoFile(allDevicesData);                                                                  //saving information about devices into file (saving info to DB is added to function getAllDevicesData)
 
+        System.out.println(dbHelper.getDBCreatedPhoneData());
 
         ProductCartPage productCartPage = smartphones.clickFirstProduct();
         productCartPage.clickBuyButton();
@@ -54,18 +49,11 @@ public class RozetkaTest{
         Assert.assertTrue("Failed assert that actual text contains expected. Expected: '" + expectedMessage + "' Actual: '" + productCartPage.getRecommendationBlockText() +"'",
                 productCartPage.getRecommendationBlockText().contains(expectedMessage));
 
+    }
+
+    @After
+    public void tearDown(){
         BasePage.tearDown();
     }
-
-    @Test
-    public void testDB(){
-        JDBCHelper jdbcHelper = new JDBCHelper();
-        System.out.println(jdbcHelper.getDBTableData());
-    }
-
-//    @After
-//    public void tearDown(){
-//
-//    }
 
 }

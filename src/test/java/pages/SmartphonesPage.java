@@ -1,5 +1,6 @@
 package pages;
 
+import helper.DBHelper;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
@@ -19,6 +20,7 @@ public class SmartphonesPage extends BasePage{
     public SmartphonesPage() {
         PageFactory.initElements(BasePage.getDriver(), this);
     }
+    static int id = 0;
 
     @FindBy(xpath = "//i[.='Доступные смартфоны']//parent::span[contains(@class, 'parametrs')]")
     WebElement obtainableSmartphonesLink;
@@ -83,19 +85,6 @@ public class SmartphonesPage extends BasePage{
         return sortingDropdown.getText();
     }
 
-    public String getDevicesData() {
-        String data = "";
-        String[] arrayData = new String[3];
-        SmartphonesPage smartphonesPage = new SmartphonesPage();
-        data = smartphonesPage.getCurrentPageNumber() + " страница";
-        for (int i = 0; i < 3; i++) {
-            arrayData[i] = "Название: " + deviceName.get(i).getText() + " Цена: " + devicePrice.get(i).getText();
-            int number = i + 1;
-            data = data + "\n" + number + " устройство: " + arrayData[i];
-        }
-        return data + "\n\n";
-    }
-
     public void openSecondList() {
         this.waitFor(secondListLink);
         secondListLink.click();
@@ -115,11 +104,42 @@ public class SmartphonesPage extends BasePage{
         String data = "";
         SmartphonesPage smartphonesPage = new SmartphonesPage();
         data = data + smartphonesPage.getDevicesData();
+        this.setDevicesDataToDB();
         smartphonesPage.openSecondList();
         data = data + smartphonesPage.getDevicesData();
+        this.setDevicesDataToDB();
         smartphonesPage.openThirdList();
         data = data + smartphonesPage.getDevicesData();
+        this.setDevicesDataToDB();
         return data;
+    }
+
+    public String getDevicesData() {
+        String data = "";
+        String[] arrayData = new String[3];
+        SmartphonesPage smartphonesPage = new SmartphonesPage();
+        data = smartphonesPage.getCurrentPageNumber() + " страница";
+        for (int i = 0; i < 3; i++) {
+            arrayData[i] = "Название: " + deviceName.get(i).getText() + " Цена: " + devicePrice.get(i).getText();
+            int number = i + 1;
+            data = data + "\n" + number + " устройство: " + arrayData[i];
+        }
+        return data + "\n\n";
+    }
+
+    public void setDevicesDataToDB(){
+        String idString;
+        String name;
+        String price;
+        for (int i = 0; i < 3; i++){
+            id++;
+            idString = Integer.toString(id);
+            name = deviceName.get(i).getText();
+            price = devicePrice.get(i).getText();
+
+            DBHelper dbHelper = new DBHelper();
+            dbHelper.setDBTableData(idString, name, price);
+        }
     }
 
     public void writeDataIntoFile(String text) {
