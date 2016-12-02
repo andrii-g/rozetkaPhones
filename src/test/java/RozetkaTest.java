@@ -42,7 +42,7 @@ public class RozetkaTest{
         String allDevicesData = smartphones.getAllDevicesData(tableName);
         smartphones.writeDataIntoFile(allDevicesData);                                                                  //saving information about devices into file (saving info to DB is added to function getAllDevicesData)
 
-        System.out.println(dbHelper.getDBCreatedPhoneData(tableName));
+//        System.out.println(dbHelper.getDBCreatedPhoneData(tableName));
 
         ProductCartPage productCartPage = smartphones.clickFirstProduct();
         productCartPage.clickBuyButton();
