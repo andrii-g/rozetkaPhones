@@ -100,17 +100,20 @@ public class SmartphonesPage extends BasePage{
         return currentPageNumberBlock.getText();
     }
 
-    public String getAllDevicesData() {
+    public String getAllDevicesData(String tableName) {
         String data = "";
+        DBHelper dbHelper = new DBHelper();
         SmartphonesPage smartphonesPage = new SmartphonesPage();
         data = data + smartphonesPage.getDevicesData();
-        this.setDevicesDataToDB();
+        dbHelper.dropTable(tableName);
+        dbHelper.createTable(tableName);
+        this.setDevicesDataToDB(tableName);
         smartphonesPage.openSecondList();
         data = data + smartphonesPage.getDevicesData();
-        this.setDevicesDataToDB();
+        this.setDevicesDataToDB(tableName);
         smartphonesPage.openThirdList();
         data = data + smartphonesPage.getDevicesData();
-        this.setDevicesDataToDB();
+        this.setDevicesDataToDB(tableName);
         return data;
     }
 
@@ -127,7 +130,7 @@ public class SmartphonesPage extends BasePage{
         return data + "\n\n";
     }
 
-    public void setDevicesDataToDB(){
+    public void setDevicesDataToDB(String tableName){
         String idString;
         String name;
         String price;
@@ -138,7 +141,7 @@ public class SmartphonesPage extends BasePage{
             price = devicePrice.get(i).getText();
 
             DBHelper dbHelper = new DBHelper();
-            dbHelper.setDBTableData(idString, name, price);
+            dbHelper.setDBTableData(idString, name, price, tableName);
         }
     }
 

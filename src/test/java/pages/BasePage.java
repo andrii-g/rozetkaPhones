@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class BasePage {
     private static WebDriver driver;
-    private Wait<WebDriver> wait = new WebDriverWait(driver, 10).ignoring(StaleElementReferenceException.class);
+    private Wait<WebDriver> wait = new WebDriverWait(driver, 15).ignoring(StaleElementReferenceException.class);
 
 
     public void waitFor(WebElement element){
